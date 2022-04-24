@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductGalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,17 +22,6 @@ use App\Http\Controllers\ProductCategoryController;
 Route::get('/', function () {
     return view('auth.login');
 });
-
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
-
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
