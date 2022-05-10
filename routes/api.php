@@ -24,11 +24,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [UserController::class, 'logout']);
 
     Route::get('transactions', [TransactionController::class, 'all']);
+    Route::get('transactions-status', [TransactionController::class, 'getOrderByStatus']);
+    Route::get('transactions-history', [TransactionController::class, 'getHistoryOrder']);
     Route::post('checkout', [TransactionController::class, 'checkout']);
+    Route::post('cancel-order', [TransactionController::class, 'cancelOrder']);
+    Route::post('confirm-order', [TransactionController::class, 'confirmOrder']);
 });
 
 
+Route::post('add-products', [ProductController::class, 'addProduct']);
+Route::post('delete-products', [ProductController::class, 'deleteProduct']);
 Route::get('products', [ProductController::class, 'all']);
+Route::get('products-category', [ProductController::class, 'getProductByCategory']);
+Route::get('products-search', [ProductController::class, 'getSearchProductByCategory']);
 Route::get('categories', [ProductCategoryController::class, 'all']);
 
 Route::post('login', [UserController::class, 'login']);

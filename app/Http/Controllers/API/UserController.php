@@ -69,7 +69,7 @@ class UserController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'max:255', 'unique:users'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-                'phone' => ['required', 'string', 'max:255'],
+                // 'phone' => ['required', 'string', 'max:255'],
                 'password' => ['required', 'string', new Password]
             ]);
 
@@ -77,7 +77,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'username' => $request->username,
-                'phone' => $request->phone,
+                // 'phone' => $request->phone,
                 'password' => Hash::make($request->password),
             ]);
 
@@ -107,5 +107,20 @@ class UserController extends Controller
         $user->update($data);
 
         return ResponseFormatter::success($user,'Profile Updated');
+    }
+
+    public function getUserbyName(Request $request) {
+        $userid = $request->id;
+
+        if(Auth::user()->roles == 'ADMIN'){
+            $data = User::where('id',$userid)->first();
+            return ResponseFormatter::success($data, 'Get Name Uer Berhasil');
+        }
+
+        return ResponseFormatter::error(
+            null,
+            'Data User tidak ada',
+            404
+        );
     }
 }
