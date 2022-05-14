@@ -165,4 +165,16 @@ class TransactionController extends Controller
                 );
 
     }
+
+    public function getReportOrderByDate(Request $request) {
+        $date = date('Y-m-d',strtotime($request->date));
+
+
+        $data = Transaction::with(['items.product'])->whereDate('created_at',$date)->get();
+
+        return ResponseFormatter::success(
+            $data,
+            'Data Report Order berhasil diambil'
+        );
+    }
 }

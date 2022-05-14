@@ -26,6 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('transactions', [TransactionController::class, 'all']);
     Route::get('transactions-status', [TransactionController::class, 'getOrderByStatus']);
     Route::get('transactions-history', [TransactionController::class, 'getHistoryOrder']);
+    Route::get('report-order', [TransactionController::class, 'getReportOrderByDate']);
     Route::post('checkout', [TransactionController::class, 'checkout']);
     Route::post('cancel-order', [TransactionController::class, 'cancelOrder']);
     Route::post('confirm-order', [TransactionController::class, 'confirmOrder']);
